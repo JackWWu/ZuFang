@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kgc.zufang.mapper.UserMapper">
+
+    <insert id="register">
+        insert into user(user_password,user_phone)
+        values (#{userPassword},#{userPhone})
+    </insert>
+
+    <!--
+           //将用户名密码带入数据库 查询有没有这个用户
+    boolean queryPwdAndName(String userName, String userPassword);
+    -->
+    <select id="queryPwdAndName" resultType="com.kgc.zufang.beans.User">
+
+        select user_id,user_name,user_password,user_type,user_phone,user_headimg,user_sex,
+            user_qq,user_static
+                from user
+                     where user_phone=#{userPhone} and user_password=#{userPassword}
+
+    </select>
+</mapper>
